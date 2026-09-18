@@ -1,1 +1,87 @@
-{"sessionId":"rehab-32","prescription":{"id":"rx-8","version":3,"validFrom":"2026-09-15T08:00:00+08:00"},"events":[{"eventId":"t1","capturedAt":"2026-09-15T09:05:00+08:00","receivedAt":"2026-09-15T09:05:02+08:00","heartRate":112},{"eventId":"s1","capturedAt":"2026-09-15T09:08:00+08:00","receivedAt":"2026-09-15T09:08:01+08:00","symptom":"chest-tightness"},{"eventId":"t2","capturedAt":"2026-09-15T09:07:00+08:00","receivedAt":"2026-09-15T09:12:00+08:00","heartRate":136}]}
+{
+  "scenarioId": "fixture-rehab-32",
+  "description": "患者 P-1 居家有氧训练：腕表仍缓存上周区间 v2；本次训练固定引用调药后签署的 v3；09:07 起断连，09:08 上报胸闷被实时停止，09:12 断连恢复后迟到心率仅补充复核；09:10 治疗师又发布 v4，但不得改写进行中/已结束课程。",
+  "patientId": "P-1",
+  "therapistId": "therapist-7",
+  "prescriptions": [
+    {
+      "prescriptionId": "rx-8",
+      "version": 2,
+      "patientId": "P-1",
+      "validFrom": "2026-09-08T08:00:00+08:00",
+      "validUntil": "2026-09-15T08:00:00+08:00",
+      "heartRateZone": { "minimum": 100, "maximum": 140 },
+      "durationMinutes": 30,
+      "contraindications": ["chest-tightness", "chest-pain"],
+      "signedBy": "therapist-7",
+      "note": "上周版本：腕表离线缓存的仍是它的区间"
+    },
+    {
+      "prescriptionId": "rx-8",
+      "version": 3,
+      "patientId": "P-1",
+      "validFrom": "2026-09-15T08:00:00+08:00",
+      "validUntil": "2026-09-22T20:00:00+08:00",
+      "heartRateZone": { "minimum": 95, "maximum": 125 },
+      "durationMinutes": 30,
+      "contraindications": ["chest-tightness", "chest-pain", "syncope", "severe-dyspnea"],
+      "signedBy": "therapist-7",
+      "note": "调药后治疗师重新签署的当次有效处方"
+    },
+    {
+      "prescriptionId": "rx-8",
+      "version": 4,
+      "patientId": "P-1",
+      "validFrom": "2026-09-15T09:10:00+08:00",
+      "validUntil": "2026-09-22T20:00:00+08:00",
+      "heartRateZone": { "minimum": 90, "maximum": 110 },
+      "durationMinutes": 25,
+      "contraindications": ["chest-tightness", "chest-pain", "syncope", "severe-dyspnea"],
+      "signedBy": "therapist-7",
+      "note": "课程开始后才发布：若被它改写，t1 的 112 bpm 会从‘区间内’变成‘超限’——这正是禁止追溯改写的原因",
+      "publishAt": "2026-09-15T09:10:00+08:00"
+    }
+  ],
+  "session": {
+    "sessionId": "rehab-32",
+    "startAt": "2026-09-15T09:04:00+08:00",
+    "prescriptionId": "rx-8",
+    "version": 3,
+    "deviceReportedZone": { "minimum": 100, "maximum": 140 }
+  },
+  "events": [
+    { "eventId": "t1", "capturedAt": "2026-09-15T09:05:00+08:00", "receivedAt": "2026-09-15T09:05:02+08:00", "heartRate": 112 },
+    { "eventId": "s1", "capturedAt": "2026-09-15T09:08:00+08:00", "receivedAt": "2026-09-15T09:08:01+08:00", "symptom": "chest-tightness" },
+    { "eventId": "t2", "capturedAt": "2026-09-15T09:07:00+08:00", "receivedAt": "2026-09-15T09:12:00+08:00", "heartRate": 136 },
+    { "eventId": "t2b", "capturedAt": "2026-09-15T09:08:05+08:00", "receivedAt": "2026-09-15T09:12:00+08:00", "heartRate": 133, "note": "断连恢复后随 t2 一同补传；与 t2 构成 65 秒持续超限，但课程已停止，只能补充复核" }
+  ],
+  "deviceAcknowledgements": [
+    { "eventId": "a1", "sessionId": "rehab-32", "commandAction": "stop", "status": "acknowledged", "at": "2026-09-15T09:08:20+08:00", "detail": "腕表确认已停止训练程序" }
+  ],
+  "helpRequests": [
+    { "eventId": "h1", "sessionId": "rehab-32", "at": "2026-09-15T09:08:40+08:00", "message": "胸口发闷，已停下，需要帮助" }
+  ],
+  "badgeClaims": [
+    { "claimId": "b1", "sessionId": "rehab-32", "badgeCode": "daily-goal-30min", "at": "2026-09-15T09:16:00+08:00", "note": "设备按上周区间与暂停前时长自行弹出的达标徽章" },
+    { "claimId": "b2", "sessionId": "rehab-32", "badgeCode": "daily-goal-30min", "at": "2026-09-17T09:10:00+08:00", "note": "复诊关闭安全事件后设备重试：仍因有效时长不足被拒" }
+  ],
+  "parallelSession": {
+    "sessionId": "rehab-33",
+    "startAt": "2026-09-15T09:03:00+08:00",
+    "prescriptionId": "rx-8",
+    "version": 3,
+    "telemetry": [
+      { "eventId": "p1", "capturedAt": "2026-09-15T09:06:00+08:00", "receivedAt": "2026-09-15T09:06:02+08:00", "heartRate": 104 }
+    ],
+    "acknowledgement": { "eventId": "a2", "commandAction": "stop", "status": "acknowledged", "at": "2026-09-15T09:20:30+08:00" }
+  },
+  "recall": { "reason": "用药再次调整，暂停 rx-8 全部居家训练", "at": "2026-09-15T09:20:00+08:00" },
+  "review": {
+    "reviewId": "r1",
+    "sessionId": "rehab-32",
+    "reviewerId": "therapist-7",
+    "at": "2026-09-17T09:05:00+08:00",
+    "notes": "复诊调阅完整课程记录：胸闷实时停止处置正确；迟到心率证实 09:07-09:08 持续超限，与症状一致；患者当天自行暂停数分钟后曾尝试继续，设备拒绝恢复。安排进一步检查，关闭安全事件。"
+  },
+  "retention": { "policyId": "clinical-raw-1y", "sealAt": "2026-09-18T02:00:00+08:00", "retentionUntil": "2027-09-15T23:59:59+08:00" }
+}
