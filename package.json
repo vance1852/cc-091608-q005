@@ -1,1 +1,15 @@
-{"name":"cardiac-rehab-guard","version":"0.1.0","private":true,"type":"module","scripts":{"check":"tsc --noEmit","test":"npm run check"},"devDependencies":{"typescript":"5.9.2"}}
+{
+  "name": "cardiac-rehab-guard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "replay": "node src/replay.ts",
+    "test": "npm run check && node --test test/rehab.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.3",
+    "typescript": "5.9.2"
+  }
+}
